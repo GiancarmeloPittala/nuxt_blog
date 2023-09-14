@@ -3,6 +3,7 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: [
     '@pinia/nuxt',
+    '@nuxtjs/tailwindcss'
   ],
 
   pinia: {
@@ -11,4 +12,8 @@ export default defineNuxtConfig({
       ['defineStore', 'definePiniaStore'], 
     ],
   },
+
+  tailwindcss: {
+    viewer: false
+  }
 })

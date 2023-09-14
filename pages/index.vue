@@ -1,6 +1,8 @@
 <template>
   <div>
-    test
+    <h1 class="text-red-900">
+      test
+    </h1>
     {{  testStore.text }}
   </div>
 </template>
