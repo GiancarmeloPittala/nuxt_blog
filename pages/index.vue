@@ -1,17 +1,24 @@
 <template>
   <div>
-    <h1 class="text-red-900">
-      test
-    </h1>
-    {{  testStore.text }}
+    <PostsGrid /> 
+    <div class="flex gap-4 justify-between">
+      <UPagination v-model="postStore.page" :total="postStore.total" :max="6" :page-count="postStore.take" @update:model-value="upgade_page"  />
+      <USelect v-model="postStore.take" :options="[5,10,20]" @change="upgade_page"/>
+    </div>
   </div>
 </template>
 
 
-<script setup>
-import { useTestStore } from '~/stores/test';
-const testStore = useTestStore()
+<script setup> 
+import { usePostStore } from '@/stores/post';
+const postStore = usePostStore();
 
+// ascolto di un cambiamento 
 
+ function upgade_page () {
+  postStore.skip = (postStore.page - 1) * postStore.take
+  postStore.init()
+}
 
 </script>
+

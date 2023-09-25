@@ -1,0 +1,42 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Articoli {
+  id         String      @id @default(cuid())
+  titolo     String?
+  desc       String?
+  created_at DateTime    @default(now())
+  updated_at DateTime    @default(now()) @updatedAt
+  categorie  Categorie[]
+  tags       Tags[]
+}
+
+// 1 a n
+// ctrl + alt + f
+
+model Categorie {
+  id     String  @id @default(cuid())
+  titolo String?
+  desc   String?
+
+  Articoli    Articoli? @relation(fields: [articoli_id], references: [id])
+  articoli_id String?
+}
+
+model Tags {
+  id     String  @id @default(cuid())
+  titolo String?
+  desc   String?
+
+  Articoli    Articoli? @relation(fields: [articoli_id], references: [id])
+  articoli_id String?
+}

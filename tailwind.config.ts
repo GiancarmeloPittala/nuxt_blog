@@ -1,5 +1,6 @@
-/** @type {import('tailwindcss').Config} */
-module.exports = {
+import type { Config } from 'tailwindcss'
+
+export default <Partial<Config>>{
   content: [
     'components/**/*.{vue,js,ts}',
     'layouts/**/*.vue',
@@ -13,7 +14,11 @@ module.exports = {
     'content/**/*.md'
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        rosso: '#00ff00'
+      }
+    },
   },
   plugins: [],
 }
