@@ -4,7 +4,8 @@ const prisma = new PrismaClient()
 export default defineEventHandler( async event => {
   // paginazione 
 
-  let { take, skip } = getQuery(event)
+  // sporco 
+  let { take, skip, orderBy } = getQuery(event)
 
   if (!take) take = 25
   else if ( take > 250 ) take = 250; // limite consentito
@@ -21,11 +22,12 @@ export default defineEventHandler( async event => {
   const articoli = await prisma.articoli.findMany({
     skip,
     take, 
-    orderBy: [ { created_at: 'asc'  }]
+    orderBy: [ { created_at: 'asc'  }],
+    where:{ stato: 'attivo'}
   })
   
   // conteggio dei articoli 
-  const count = await prisma.articoli.count()
+  const count = await prisma.articoli.count({ where:{ stato: 'attivo'}})
 
   return { data: articoli, count } 
 })
