@@ -1,7 +1,7 @@
 <template>
   <div>
     <Header />
-    <main> 
+    <main class="my-[50px] px-4"> 
       <slot />
     </main>
   </div>
