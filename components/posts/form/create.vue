@@ -1,5 +1,5 @@
 <template>
-  <div class="px-4 grid grid-cols-2 gap-4">
+  <div class="grid grid-cols-2 gap-4">
     <UInput
       v-model="articolo.titolo"
       type="text"
