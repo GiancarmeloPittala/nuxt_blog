@@ -1,10 +1,13 @@
 <template>
   <div>
-    <PostsGrid /> 
-    <div class="flex gap-4 justify-between">
-      <UPagination v-model="postStore.page" :total="postStore.total" :max="6" :page-count="postStore.take" @update:model-value="upgade_page"  />
-      <USelect v-model="postStore.take" :options="[5,10,20]" @change="upgade_page"/>
-    </div>
+    <section class="grid grid-cols-2 gap-12">
+       <img class="object-cover object-center rounded-lg" src="https://source.unsplash.com/random" alt="aaaa">
+       <div>
+        <h1 class="text-4xl font-sans font-semibold mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis, hic.</h1>
+        <p class="font-thin ">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptates inventore minima eius deleniti, culpa fuga autem dolores quam cumque quos!</p>
+        <button>Explora</button>
+       </div>
+    </section>
   </div>
 </template>
 
@@ -12,13 +15,6 @@
 <script setup> 
 import { usePostStore } from '@/stores/post';
 const postStore = usePostStore();
-
-// ascolto di un cambiamento 
-
- function upgade_page () {
-  postStore.skip = (postStore.page - 1) * postStore.take
-  postStore.init()
-}
-
 </script>
+
 
