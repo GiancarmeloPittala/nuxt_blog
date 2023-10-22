@@ -1,15 +1,18 @@
 <template>
-  <div class="flex flex-col gap-[100px]">
+  <div class="container mx-auto flex flex-col gap-[100px]">
     <HomeHero />
-    <HomeHero />
-    <HomeHero />
-    <HomeHero />
-    <HomeHero />
-    <HomeHero />
+    <HomeMarchi />
+    <HomePost />
   </div>
 </template>
 
 <script setup>
 import { usePostStore } from '@/stores/post'
 const postStore = usePostStore()
+
+onMounted( async () => {
+  await postStore.init()
+})
+
+
 </script>

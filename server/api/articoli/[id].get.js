@@ -5,7 +5,7 @@ export default defineEventHandler( async event => {
  // Data un id, tornare tutti i dati del post
   const { id } = getRouterParams(event); // params
 
-  const post = await prisma.articoli.findUnique({ where: { id }, include: { tags: true } })
+  const post = await prisma.articoli.findUnique({ where: { id }, include: { tags: true, categorie: true } })
 
   return { data: post } 
 })

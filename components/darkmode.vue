@@ -6,7 +6,6 @@
   </button>
   <button v-else @click="colorMode.value = 'light'">Light</button>
 
-  aa
 </template>
 
 <script setup>

@@ -1,7 +1,6 @@
 <template>
   <div>
     <div v-for="post of postStore.posts" :key="post.id" class="flex items-center gap-4 p-4">
-      <PostsCard post="post" />
       <img class="h-[50px] w-[50px] rounded-lg object-cover" src="https://source.unsplash.com/random" alt="">
       <div>
         <NuxtLink :to="`/dashboard/articoli/${post.id}`">

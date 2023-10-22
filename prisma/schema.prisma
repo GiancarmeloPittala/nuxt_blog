@@ -10,27 +10,80 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Articoli {
-  id         String      @id @default(cuid())
-  titolo     String?
-  desc       String?
-  stato      String      @default("attivo")
-  created_at DateTime    @default(now())
-  updated_at DateTime    @default(now()) @updatedAt
-  categorie  Categorie[]
-  tags       Tags[]
+model Utente {
+
+  id String @id @default(cuid())
+  nome String?
+  nickname String @unique
+  email String @unique
+  password String 
+  permessi String @default("GUEST") // GUEST | ADMIN
 }
 
-// 1 a n
-// ctrl + alt + f
+model Articoli {
+  id         String               @id @default(cuid())
+  titolo     String?
+  desc       String?
+  stato      String               @default("attivo")
+  created_at DateTime             @default(now())
+  updated_at DateTime             @default(now()) @updatedAt
+  categorie  articolo_catagoria[]
+  tags       Tags[]
+  commenti   Commento[]
+}
+
+// un articolo quanti commenti può avere? 
+// - più commenti | 1 Articolo a n commenti  
+
+// Un commento a quanti articoli può essere collegato?
+// - Un commento è collegato ad un solo articolo 
+
+model Commento {
+  id        String @id @default(cuid())
+  contenuto String
+
+  Articoli    Articoli? @relation(fields: [articoli_id], references: [id])
+  articoli_id String?
+
+  like    Int @default(0)
+  dislike Int @default(0)
+
+  reply    Commento? @relation("commento_reply", fields: [reply_id], references: [id])
+  reply_id String?
+
+  replies Commento[] @relation("commento_reply")
+
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now()) @updatedAt
+}
+
+// anticoli quanti tag ha?
+// 1 articolo più tag
+// 1 tag un solo articoli 
+
+// 1 a n 
+
+// n a n
+// pivot 
+
+model articolo_catagoria {
+  Articoli   Articoli @relation(fields: [articoliId], references: [id])
+  articoliId String
+
+  Categorie   Categorie @relation(fields: [categorieId], references: [id])
+  categorieId String
+
+  @@id([articoliId, categorieId])
+}
 
 model Categorie {
   id     String  @id @default(cuid())
   titolo String?
   desc   String?
 
-  Articoli    Articoli? @relation(fields: [articoli_id], references: [id])
-  articoli_id String?
+  articoli   articolo_catagoria[]
+  created_at DateTime             @default(now())
+  updated_at DateTime             @default(now()) @updatedAt
 }
 
 model Tags {
@@ -40,4 +93,7 @@ model Tags {
 
   Articoli    Articoli? @relation(fields: [articoli_id], references: [id])
   articoli_id String?
+
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now()) @updatedAt
 }

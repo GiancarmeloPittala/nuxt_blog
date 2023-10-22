@@ -4,7 +4,6 @@ const prisma = new PrismaClient()
 export default defineEventHandler( async event => {
   // paginazione 
 
-  // sporco 
   let { take, skip, orderBy } = getQuery(event)
 
   if (!take) take = 25
@@ -18,19 +17,14 @@ export default defineEventHandler( async event => {
   skip = Number( skip )
 
  
-  // prende tutti gli articoli
-  const articoli = await prisma.articoli.findMany({
+  // prende tutti gli categorie
+  const categorie = await prisma.categorie.findMany({
     skip,
-    take, 
-    orderBy: [ { created_at: 'asc'  }],
-    where:{ stato: 'attivo'},
-    include: { categorie: { include: { Categorie: true } } }
+    take,
   })
-
-  // sequelize 
   
-  // conteggio dei articoli 
-  const count = await prisma.articoli.count({ where:{ stato: 'attivo'}})
+  // conteggio dei categorie 
+  const count = await prisma.categorie.count()
 
-  return { data: articoli, count } 
+  return { data: categorie, count } 
 })

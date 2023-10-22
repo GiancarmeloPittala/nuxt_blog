@@ -1,5 +1,6 @@
 <template>
-  <div class="grid grid-cols-2 gap-4">
+  <div class="grid grid-cols-2 gap-6">
+  
     <UInput
       v-model="articolo.titolo"
       type="text"
@@ -18,7 +19,7 @@
       class="col-span-2"
       type="submit"
     >
-      crea
+      crea 
     </UButton>
   </div>
 </template>
