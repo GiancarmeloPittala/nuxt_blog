@@ -4,7 +4,8 @@ export default defineNuxtConfig({
   css: [ '/assets/css/global.css'],
   modules: [
     '@pinia/nuxt',
-    '@nuxt/ui'
+    '@nuxt/ui',
+    '@pinia-plugin-persistedstate/nuxt',
   ],
 
   pinia: {

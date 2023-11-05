@@ -1,19 +1,9 @@
 <template>
   <div>
-    <h1 class="text-xl font-semibold text-center mb-4">
-      Registrazione
-    </h1>
+    <h1 class="text-xl font-semibold text-center mb-4">Login</h1>
 
-    <form action="" @submit="registrati">
+    <form action="" @submit.prevent="utenteStore.login(utente)">
       <div class="flex flex-col gap-4 max-w-3xl mx-auto">
-        <input
-          v-model="utente.email"
-          class="w-full border border-gray-300 px-4 py-2 rounded-xl"
-          placeholder="email"
-          type="email"
-          name=""
-          id=""
-        />
         <input
           v-model="utente.nickname"
           class="w-full border border-gray-300 px-4 py-2 rounded-xl"
@@ -31,7 +21,7 @@
           id=""
         />
         <UButton type="submit">
-          <span class="mx-auto"> Registrati </span>
+          <span class="mx-auto"> Login </span>
         </UButton>
       </div>
     </form>
@@ -39,13 +29,12 @@
 </template>
 
 <script setup>
+import { useUtenteStore } from '~/stores/utente';
+const utenteStore = useUtenteStore();
 const utente = reactive({
-  email: '',
   password: '',
   nickname: ''
 })
 
-async function registrati () {
-  await $fetch('/api/utente/registrati', { method: 'POST', body: utente })
-}
+
 </script>

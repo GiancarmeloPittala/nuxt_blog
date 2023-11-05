@@ -22,6 +22,11 @@
 </template>
 
 <script setup>
+
+definePageMeta({
+  layout: 'dashboard'
+})
+
 import { usePostStore } from '@/stores/post';
 const postStore = usePostStore();
 
